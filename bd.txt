@@ -1,0 +1,115 @@
+Create database biblioteca;
+
+use biblioteca;
+
+CREATE TABLE cliente (
+ra int PRIMARY KEY auto_increment,
+nome varchar(100),
+turma varchar(15),
+email varchar(50) unique,
+telefone varchar(15),
+datanascimento date
+);
+
+CREATE TABLE bibliotecario(
+codfuncionario int PRIMARY KEY auto_increment,
+nome varchar(100),
+logradouro varchar(50),
+número varchar(10),
+complemento varchar(20),
+bairro varchar(50),
+cidade varchar(50),
+uf varchar(2),
+cep varchar(15),
+email varchar(50),
+telefone varchar(15),
+cpf varchar(15),
+rg varchar(15),
+datanascimento date
+);
+
+CREATE TABLE livros (
+codlivro int PRIMARY KEY auto_increment,
+editora varchar(30),
+gênero varchar(30),
+autor varchar(50),
+título varchar(50)
+);
+ 
+
+CREATE TABLE empréstimo_devolução (
+codemprestimo int PRIMARY KEY auto_increment,
+data_emprestimo date,
+data_devolução date,
+ra int,
+codfuncionario int,
+codlivro int,
+FOREIGN KEY(ra) REFERENCES cliente (ra),
+FOREIGN KEY(codfuncionario) REFERENCES bibliotecario (codfuncionario),
+FOREIGN KEY(codlivro) REFERENCES livros (codlivro)
+);
+
+Insert INTO cliente (nome, turma, telefone, email, datanascimento) VALUES
+('Jughead Jones', '3°A', '9421-6970', 'jug@email.com', '2001-8-4'),     
+('Cole Sprouse', '3°A', '4322-5019','sprouse@gmail.com', '1992-8-4'),   
+('Betty Cooper', '3°A', '9223-4828','btcp@email.com', '2001-9-13'),   
+('Lili Reinhart', '3°A','4124-3737', 'reinhart@gmail.com', '1996-8-4'),   
+('Veronica Lodge', '3°A','9525-2646','verolodge@email.com', '2001-8-4'),    
+('Camila Mendes', '3°A', '4626-1555','camendes@gmail.com', '1994-6-29'),   
+('Archie Andrews', '3°A', '9727-4964','archieandrews@email.com', '2001-8-4'),   
+('KJ Apa', '3°A', '4828-8373','Apakj@gmail.com',  '1997-6-17'),  
+('Cheryl Blossom', '3°A', '9929-9182','redcheryl@email.com', '2001-8-18'),   
+('Medalaine Petsch', '3°A', '4020-0890','mpetsch@gmail.com', '1994-8-18');
+
+INSERT INTO Bibliotecario (nome, email, datanascimento, telefone, cpf, cidade, uf, rg, cep, número, bairro, logradouro, complemento) VALUES
+
+('Luke Perry', 'perry@gmail.com', '1966-10-11', '4629-8731', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL'),
+('Fred Andrews', 'fredandrews@email.com','1971-10-11', '9730-7622', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL'),
+('Mädchen Amick', 'amick@gmail.com','1970-12-12', '4538-6819', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL'),
+('Alice Cooper', 'alicecooper@email.com','1971-10-11', '9351-3870', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL', 'NULL');
+
+INSERT INTO livros (título, gênero, editora) VALUES
+
+('Desventuras em série Mau Começo', 'aventura', 'CIA.DAS LETRAS'),
+('Desventuras em série A sala dos répteis', 'aventura', 'CIA.DAS LETRAS'),
+('Desventuras em série O lago das sanguessugas', 'aventura', 'CIA.DAS LETRAS'),
+('Desventuras em série Serraria baixo-astral', 'aventura', 'CIA.DAS LETRAS'),
+('Os vingadores e a filosofia', 'Ficção e filosofia', 'Madras'),
+('Insurgente', 'ficção', 'ROCCO JOVENS LEITORES'),
+('o homem mais inteligente da história', 'ficção', 'SEXTANTE');
+
+
+
+
+INSERT INTO empréstimo_devolução (data_emprestimo, data_devolução, ra, codfuncionario, codlivro) VALUES
+
+('2020-5-23','2020-5-25', 2, 3, 1),
+('2020-5-25','2020-5-27', 4, 2, 2),
+('2020-5-27','2020-5-29', 5, 4, 3),
+('2020-5-29','2020-5-31', 7, 1, 4),
+('2020-3-08','2020-3-22', 10,4, 5),
+('2020-1-06','2020-2-27', 3, 3, 6),
+('2020-4-02','2020-5-17', 6, 2, 7);
+
+ALTER TABLE livros ADD COLUMN páginas int;
+ALTER TABLE livros ADD COLUMN qtdExemplares int
+
+
+UPDATE livros SET páginas = 179, qtdExemplares = 2 WHERE codlivro = 1;
+UPDATE livros SET páginas = 179, qtdExemplares = 3 WHERE codlivro = 2;
+UPDATE livros SET páginas = 179, qtdExemplares = 4 WHERE codlivro = 3;
+UPDATE livros SET páginas = 179, qtdExemplares = 1 WHERE codlivro = 4;
+UPDATE livros SET páginas = 250, qtdExemplares = 2 WHERE codlivro = 5;
+UPDATE livros SET páginas = 500, qtdExemplares = 2 WHERE codlivro = 6;
+UPDATE livros SET páginas = 250, qtdExemplares = 3 WHERE codlivro = 7;
+
+
+
+
+
+
+
+
+
+
+
